@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="41c63534-9556-4328-a9dd-595eb69ed5c1" ChangeDateTime="04/24/2018 01:43:39">
+    <Property Name="ElementName" Value="[dbo].[Card].[LastDayRepeatedAy]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Card]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="LastDayRepeatedAt" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5c2b7681-0316-4b5e-8780-0fad8367c096" ChangeDateTime="05/07/2018 22:46:12">
+    <Property Name="ElementName" Value="[dbo].[Card].[CardStatus]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Card]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CardStatusId" />
+  </Operation>
+</Operations>
