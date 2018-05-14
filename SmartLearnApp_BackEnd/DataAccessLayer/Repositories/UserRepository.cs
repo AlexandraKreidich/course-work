@@ -1,5 +1,7 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Dapper;
@@ -32,6 +34,30 @@ namespace DataAccessLayer.Repositories
                     commandType: CommandType.StoredProcedure);
 
                 return Mapper.Map<UserResponseDalModel>(user);
+            }
+        }
+
+        public async Task<IEnumerable<UserResponseDalModel>> GetUsersWithMissingCards()
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                IEnumerable<User> users = await connection.QueryAsync<User>(
+                    "GetUsersWithMissingCards",
+                    commandType: CommandType.StoredProcedure);
+
+                return users?.Select(Mapper.Map<UserResponseDalModel>);
+            }
+        }
+
+        public async Task<IEnumerable<UserResponseDalModel>> GetUsersHaveCardsToRepeat()
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                IEnumerable<User> users = await connection.QueryAsync<User>(
+                    "GetUsersHaveCardsToRepeat",
+                    commandType: CommandType.StoredProcedure);
+
+                return users?.Select(Mapper.Map<UserResponseDalModel>);
             }
         }
 

@@ -24,7 +24,7 @@ namespace WebApi.Controllers
             _cardService = cardService;
         }
 
-        // GET /cards
+        // GET /cards/get
         [HttpGet]
         public async Task<IActionResult> Get()
         {

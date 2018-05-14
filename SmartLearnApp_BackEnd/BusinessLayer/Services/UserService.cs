@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using BusinessLayer.Contracts;
 using DataAccessLayer.Contracts;
 using DataAccessLayer.Models.DataTransferObjects;
@@ -85,6 +87,20 @@ namespace BusinessLayer.Services
             );
 
             return userBlModel;
+        }
+
+        public async Task<IEnumerable<UserBlModel>> GetUsersWithMissingCards()
+        {
+            IEnumerable<UserResponseDalModel> userResponseDalModels = await _userRepository.GetUsersWithMissingCards();
+
+            return userResponseDalModels?.Select(Mapper.Map<UserBlModel>);
+        }
+
+        public async Task<IEnumerable<UserBlModel>> GetUsersHaveCardsToRepeat()
+        {
+            IEnumerable<UserResponseDalModel> userResponseDalModels = await _userRepository.GetUsersHaveCardsToRepeat();
+
+            return userResponseDalModels?.Select(Mapper.Map<UserBlModel>);
         }
     }
 }

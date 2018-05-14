@@ -5,6 +5,7 @@ using AutoMapper;
 using BusinessLayer;
 using DataAccessLayer;
 using DataAccessLayer.Contracts;
+using FluentScheduler;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -13,6 +14,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using WebApi.Contracts;
+using WebApi.Services;
+
 //using FluentScheduler;
 
 namespace WebApi
@@ -81,12 +84,16 @@ namespace WebApi
                             .AllowCredentials());
                 });
 
+            services.AddSingleton<BackgroundJobsRegistry>();
+
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
+            BackgroundJobsRegistry registry = serviceProvider.GetService<BackgroundJobsRegistry>();
+            JobManager.Initialize(registry);
 
             if (env.IsDevelopment())
             {

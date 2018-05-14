@@ -65,10 +65,13 @@
     <Build Include="Stored Procedures\AddUser.sql" />
     <Build Include="Tables\Card.sql" />
     <Build Include="Tables\Folder.sql" />
-    <Build Include="Stored Procedures\UpdateCardOnAnswer.sql" />
-    <Build Include="Stored Procedures\AddNewCard.sql" />
-    <Build Include="Stored Procedures\UpdateCard.sql" />
+    <Build Include="Stored Procedures\UpdateCardDates.sql" />
     <Build Include="Stored Procedures\AddOrUpdateCard.sql" />
+    <Build Include="Stored Procedures\GetCards.sql" />
+    <Build Include="Stored Procedures\GetMissingCards.sql" />
+    <Build Include="Stored Procedures\DeleteCard.sql" />
+    <Build Include="Stored Procedures\GetUsersWithMissingCards.sql" />
+    <Build Include="Stored Procedures\GetUsersHaveCardsToRepeat.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />
