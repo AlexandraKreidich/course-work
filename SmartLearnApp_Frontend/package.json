@@ -1,0 +1,45 @@
+{
+  "name": "tickets-online",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "^4.0.0",
+    "haproxy": "^0.3.0",
+    "moment": "^2.22.0",
+    "react": "^16.2.0",
+    "react-autocomplete": "^1.8.1",
+    "react-bootstrap": "^0.32.1",
+    "react-datepicker": "^1.4.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.7",
+    "react-route": "^1.0.3",
+    "react-router-dom": "^4.2.2",
+    "react-router-redux": "^4.0.8",
+    "react-scripts": "1.1.1",
+    "react-throttle": "^0.3.0",
+    "redux": "^3.7.2",
+    "redux-fetch-middleware": "^4.0.0",
+    "redux-form": "^7.3.0",
+    "redux-form-validation": "0.0.8",
+    "redux-form-validators": "^2.4.3",
+    "redux-thunk": "^2.2.0"
+  },
+  "scripts": {
+    "lint": "eslint '**/*.{js,jsx}' --quiet",
+    "format": "prettier --write '**/*.{js,jsx}'",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.2",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.10.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0",
+    "prettier": "^1.11.1",
+    "prettier-eslint": "^8.8.1"
+  }
+}

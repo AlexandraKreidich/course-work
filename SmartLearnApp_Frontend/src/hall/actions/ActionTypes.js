@@ -1,0 +1,2 @@
+export const HALL_MODEL_REQUEST = "HALL_REQUEST";
+export const HALL_MODEL_RESPONSE = "HALL_RESPONSE";
