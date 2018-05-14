@@ -1,2 +1,2 @@
 # course-work
-App for iterative repetition to learn new words
+App for iterative repeating to learn new words
