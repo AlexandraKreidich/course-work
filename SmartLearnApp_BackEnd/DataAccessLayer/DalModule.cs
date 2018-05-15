@@ -11,6 +11,7 @@ namespace DataAccessLayer
         {
             collection.AddSingleton<IUserRepository, UserRepository>();
             collection.AddSingleton<ICardRepository, CardRepository>();
+            collection.AddSingleton<IFolderRepository, FolderRepository>();
         }
     }
 }

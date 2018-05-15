@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using BusinessLayer.Models.Card;
+using BusinessLayer.Models.Folder;
 using BusinessLayer.Models.User;
 using JetBrains.Annotations;
 using WebApi.Models.Card;
+using WebApi.Models.Folder;
 using WebApi.Models.User;
 
 namespace WebApi
@@ -15,6 +17,7 @@ namespace WebApi
             configuration.CreateMap<CardWebApiModel, CardBlModel>();
             configuration.CreateMap<CardBlModel, CardWebApiModel>();
             configuration.CreateMap<CardAnswerRequestWebApiModel, CardAnswerRequestBlModel>();
+            configuration.CreateMap<FolderResponseBlModel, FolderResponseWebApiModel>();
         }
     }
 }

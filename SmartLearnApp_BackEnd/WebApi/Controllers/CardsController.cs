@@ -53,7 +53,7 @@ namespace WebApi.Controllers
             );
         }
 
-        // PUT /cards
+        // PUT /cards/put
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] CardWebApiModel cardWebApiModel)
         {
@@ -68,6 +68,7 @@ namespace WebApi.Controllers
 
         // POST /cards/answer
         [HttpPost]
+        [Route("answer")]
         public IActionResult Post([FromBody] CardAnswerRequestWebApiModel cardAnswerRequestWebApiModel)
         {
             _cardService.AnswerOnCard(Mapper.Map<CardAnswerRequestBlModel>(cardAnswerRequestWebApiModel));
@@ -77,7 +78,7 @@ namespace WebApi.Controllers
 
         // DELETE /cards/{id}
         [HttpDelete("{id:int}")]
-        public void Delete(int id)
+        public void Delete([FromQuery] int id)
         {
             _cardService.DeleteCard(id);
         }
