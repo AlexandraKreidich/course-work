@@ -10,7 +10,7 @@ namespace DataAccessLayer
         public static void Initialize([NotNull] IMapperConfigurationExpression configuration)
         {
             configuration.CreateMap<User, UserResponseDalModel>();
-            configuration.CreateMap<Folder, FolderResponseDalModel>();
+            configuration.CreateMap<Folder, FolderDalModel>();
             configuration.CreateMap<Card, CardDalModel>();
         }
     }

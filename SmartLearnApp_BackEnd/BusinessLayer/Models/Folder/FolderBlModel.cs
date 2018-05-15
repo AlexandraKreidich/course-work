@@ -2,19 +2,23 @@
 
 namespace BusinessLayer.Models.Folder
 {
-    public class FolderResponseBlModel
+    public class FolderBlModel
     {
         public int Id { get; set; }
+
+        public int UserId { get; set; }
 
         [NotNull]
         public string Name { get; set; }
 
-        public FolderResponseBlModel(
+        public FolderBlModel(
             int id,
-            string name
+            int userId,
+            [NotNull] string name
         )
         {
             Id = id;
+            UserId = userId;
             Name = name;
         }
     }

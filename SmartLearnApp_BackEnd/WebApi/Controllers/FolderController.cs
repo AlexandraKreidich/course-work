@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -18,7 +19,7 @@ namespace WebApi.Controllers
     [Authorize]
     public class FolderController : Controller
     {
-        [NotNull] 
+        [NotNull]
         private readonly IFolderService _folderService;
 
         public FolderController([NotNull] IFolderService folderService)
@@ -32,11 +33,11 @@ namespace WebApi.Controllers
         {
             int userId = HttpContext.User.GetUserId();
 
-            IEnumerable<FolderResponseBlModel> folderResponseBlModels = await _folderService.GetUserFolders(userId);
+            IEnumerable<FolderBlModel> folderResponseBlModels = await _folderService.GetUserFolders(userId);
 
             return Ok
             (
-                folderResponseBlModels?.Select(Mapper.Map<FolderResponseWebApiModel>)
+                folderResponseBlModels?.Select(Mapper.Map<FolderWebApiModel>)
             );
         }
 
@@ -54,16 +55,29 @@ namespace WebApi.Controllers
 
         // PUT /folder/put
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody] FolderRequestWebApiModel folder)
+        public async Task<IActionResult> Put([FromBody] FolderWebApiModel folder)
         {
-            
-            return Ok();
+            FolderBlModel folderBlModel = await _folderService.AddOrUpdateFolder(Mapper.Map<FolderBlModel>(folder));
+
+            return Ok
+            (
+                Mapper.Map<FolderWebApiModel>(folderBlModel)
+            );
         }
 
-        // DELTE /folder/{id}
+        // DELETE /folder/{id}
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete([FromQuery] int id)
         {
+            try
+            {
+                _folderService.DeleteFolder(id);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+
             return Ok();
         }
 

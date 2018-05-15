@@ -10,9 +10,14 @@ namespace BusinessLayer.Contracts
     public interface IFolderService
     {
         [ItemCanBeNull]
-        Task<IEnumerable<FolderResponseBlModel>> GetUserFolders(int userId);
+        Task<IEnumerable<FolderBlModel>> GetUserFolders(int userId);
 
         [ItemCanBeNull]
         Task<IEnumerable<CardBlModel>> GetFolderCards(int folderId);
+
+        [ItemNotNull]
+        Task<FolderBlModel> AddOrUpdateFolder([NotNull] FolderBlModel folderBlModel);
+
+        void DeleteFolder(int folderId);
     }
 }

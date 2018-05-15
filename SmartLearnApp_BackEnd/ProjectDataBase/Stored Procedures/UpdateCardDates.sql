@@ -1,8 +1,8 @@
 ﻿CREATE PROCEDURE [dbo].[UpdateCardDates]
     @Id int,
     @LearnDate DateTime,
-    @LastDayRepeatedAt Date,
-    @ShouldRepeatAt Date
+    @LastDayRepeatedAt DATE,
+    @ShouldRepeatAt DATE
 AS
     UPDATE Card
     SET

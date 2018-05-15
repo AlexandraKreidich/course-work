@@ -27,11 +27,26 @@ namespace BusinessLayer.Services
             return learnDate.AddDays(days);
         }
 
-        public void AnswerOnCard(CardAnswerRequestBlModel card)
+        public void RescheduleMissedCards(int[] cardIds)
+        {
+            foreach (int cardId in cardIds)
+            {
+                CardRescheduleDalModel cardRescheduleDalModel = new CardRescheduleDalModel(
+                    cardId,
+                    DateTime.Now.Date,
+                    DateTime.Now.Date,
+                    DateTime.Now.Date.AddDays(1).Date
+                );
+
+                _cardRepository.RescheduleMissedCards(cardRescheduleDalModel);
+            }
+        }
+
+        public void AnswerOnCard(CardAnswerBlModel card)
         {
             if (card.Result == AnswerResult.Ok)
             {
-                CardAnswerRequestDalModel cardAnswerDalModel = new CardAnswerRequestDalModel(
+                CardAnswerDalModel cardAnswerDalModel = new CardAnswerDalModel(
                     card.Id,
                     card.LearnDate,
                     card.ShouldRepeatAt,
@@ -41,9 +56,10 @@ namespace BusinessLayer.Services
                 _cardRepository.UpdateCardDates(cardAnswerDalModel);
             }
 
+            // ! should check documents
             if (card.Result == AnswerResult.Forget)
             {
-                CardAnswerRequestDalModel cardAnswerDalModel = new CardAnswerRequestDalModel(
+                CardAnswerDalModel cardAnswerDalModel = new CardAnswerDalModel(
                     card.Id,
                     card.LastDayRepeatedAt,
                     card.ShouldRepeatAt,
@@ -114,10 +130,9 @@ namespace BusinessLayer.Services
                     cardDalModel.ShouldRepeatAt
                 );
             }
-            
         }
 
-        public async Task<IEnumerable<CardBlModel>> GetCards(int userId)
+        public async Task<IEnumerable<CardBlModel>> GetCardsForUserToRepeat(int userId)
         {
             IEnumerable<CardDalModel> cardDalModels = await _cardRepository.GetCards(userId);
 
@@ -127,22 +142,6 @@ namespace BusinessLayer.Services
         public async Task<IEnumerable<CardBlModel>> GetMissedCards(int userId)
         {
             IEnumerable<CardDalModel> cardDalModels = await _cardRepository.GetMissingCards(userId);
-
-            if (cardDalModels != null)
-            {
-                foreach (CardDalModel card in cardDalModels)
-                {
-                    _cardRepository.UpdateCardDates(
-                        new CardAnswerRequestDalModel
-                        (
-                            card.Id,
-                            card.LastDayRepeatedAt.Date,
-                            card.ShouldRepeatAt.Date,
-                            card.ShouldRepeatAt.AddDays(1).Date
-                        )
-                    );
-                }
-            }
 
             return cardDalModels?.Select(Mapper.Map<CardBlModel>);
         }

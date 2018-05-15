@@ -13,10 +13,7 @@ namespace BusinessLayer
         {
             configuration.CreateMap<DataAccessLayer.StoredProcedureExecutionResult, StoredProcedureExecutionResult>();
             configuration.CreateMap<CardDalModel, CardBlModel>();
-            configuration.CreateMap<FolderResponseDalModel, FolderResponseBlModel>().ConstructUsing
-            (
-                x => new FolderResponseBlModel(x.Id, x.Name)
-            );
+            configuration.CreateMap<FolderDalModel, FolderBlModel>();
         }
     }
 }

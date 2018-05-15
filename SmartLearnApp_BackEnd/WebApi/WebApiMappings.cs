@@ -16,8 +16,8 @@ namespace WebApi
             configuration.CreateMap<RegisterUserWebApiModel, RegisterUserBlModel>();
             configuration.CreateMap<CardWebApiModel, CardBlModel>();
             configuration.CreateMap<CardBlModel, CardWebApiModel>();
-            configuration.CreateMap<CardAnswerRequestWebApiModel, CardAnswerRequestBlModel>();
-            configuration.CreateMap<FolderResponseBlModel, FolderResponseWebApiModel>();
+            configuration.CreateMap<CardAnswerWebApiModel, CardAnswerBlModel>();
+            configuration.CreateMap<FolderBlModel, FolderWebApiModel>();
         }
     }
 }

@@ -5,4 +5,4 @@ AS
     SET @NowDate = CONVERT (date, GETDATE());
     SELECT *
     FROM dbo.[Card]
-    WHERE (UserId = @UserId) AND (ShouldRepeatAt = @NowDate) 
+    WHERE (UserId = @UserId) AND (ShouldRepeatAt = @NowDate)

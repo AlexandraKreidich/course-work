@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Dapper;
@@ -24,7 +22,7 @@ namespace DataAccessLayer.Repositories
             _settings = settings;
         }
 
-        public async void UpdateCardDates(CardAnswerRequestDalModel cardAnswerDalModel)
+        public async void UpdateCardDates(CardAnswerDalModel cardAnswerDalModel)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
@@ -82,7 +80,7 @@ namespace DataAccessLayer.Repositories
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
                 int id = await connection.ExecuteScalarAsync<int>(
-                    "AddNewCard",
+                    "AddOrUpdateCard",
                     new
                     {
                         Id = cardDalModel.Id,
@@ -97,6 +95,24 @@ namespace DataAccessLayer.Repositories
                     commandType: CommandType.StoredProcedure);
 
                 return id;
+            }
+        }
+
+        public async void RescheduleMissedCards(CardRescheduleDalModel cardRescheduleDalModel)
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                await connection.ExecuteAsync(
+                    "UpdateCardDates",
+                    new
+                        {
+                            Id = cardRescheduleDalModel.Id,
+                            LearnDate = cardRescheduleDalModel.LearnDate.Date,
+                            LastDayRepeatedAt = cardRescheduleDalModel.LastDayRepeatedAt.Date,
+                            ShouldRepeatAt = cardRescheduleDalModel.ShouldRepeatAt.Date
+                        },
+                    commandType: CommandType.StoredProcedure
+                );
             }
         }
 

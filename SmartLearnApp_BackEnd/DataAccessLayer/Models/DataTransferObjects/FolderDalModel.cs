@@ -2,18 +2,22 @@
 
 namespace DataAccessLayer.Models.DataTransferObjects
 {
-    public class FolderRequestDalModel
+    public class FolderDalModel
     {
+        public int Id { get; set; }
+
         public int UserId { get; set; }
 
-        [NotNull] 
+        [NotNull]
         public string Name { get; set; }
 
-        public FolderRequestDalModel(
+        public FolderDalModel(
+            int id,
             int userId,
             [NotNull] string name
         )
         {
+            Id = id;
             UserId = userId;
             Name = name;
         }

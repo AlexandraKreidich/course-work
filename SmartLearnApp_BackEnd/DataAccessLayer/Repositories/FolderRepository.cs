@@ -22,7 +22,7 @@ namespace DataAccessLayer.Repositories
             _settings = settings;
         }
 
-        public async Task<IEnumerable<FolderResponseDalModel>> GetUserFolders(int userId)
+        public async Task<IEnumerable<FolderDalModel>> GetUserFolders(int userId)
         {
             using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
             {
@@ -36,7 +36,7 @@ namespace DataAccessLayer.Repositories
                     commandType: CommandType.StoredProcedure
                 );
 
-                return folders?.Select(Mapper.Map<FolderResponseDalModel>);
+                return folders?.Select(Mapper.Map<FolderDalModel>);
             }
         }
 
@@ -55,6 +55,39 @@ namespace DataAccessLayer.Repositories
                 );
 
                 return cards?.Select(Mapper.Map<CardDalModel>);
+            }
+        }
+
+        public async Task<int> AddOrUpdateFolder(FolderDalModel folderDalModel)
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                int id = await connection.ExecuteScalarAsync<int>(
+                    "AddOrUpdateFolder",
+                    new
+                        {
+                            Id = folderDalModel.Id,
+                            UserId = folderDalModel.UserId,
+                            Name = folderDalModel.Name
+                        },
+                    commandType: CommandType.StoredProcedure);
+
+                return id;
+            }
+        }
+
+        public async void DeleteFolder(int folderId)
+        {
+            using (SqlConnection connection = new SqlConnection(_settings.ConnectionString))
+            {
+                await connection.ExecuteAsync(
+                    "DeleteFolder",
+                    new
+                        {
+                            Id = folderId
+                        },
+                    commandType: CommandType.StoredProcedure
+                    );
             }
         }
     }

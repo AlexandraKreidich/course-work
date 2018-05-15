@@ -3,7 +3,7 @@ using Common;
 
 namespace WebApi.Models.Card
 {
-    public class CardAnswerRequestWebApiModel
+    public class CardAnswerWebApiModel
     {
         public int Id { get; set; }
 

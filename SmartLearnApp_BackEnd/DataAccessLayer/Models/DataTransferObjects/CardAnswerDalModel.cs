@@ -1,13 +1,12 @@
 ﻿using System;
-using Common;
+using System.Collections.Generic;
+using System.Text;
 
-namespace BusinessLayer.Models.Card
+namespace DataAccessLayer.Models.DataTransferObjects
 {
-    public class CardAnswerRequestBlModel
+    public class CardAnswerDalModel
     {
         public int Id { get; set; }
-
-        public AnswerResult Result { get; set; }
 
         public DateTime LearnDate { get; set; }
 
@@ -15,16 +14,14 @@ namespace BusinessLayer.Models.Card
 
         public DateTime ShouldRepeatAt { get; set; }
 
-        public CardAnswerRequestBlModel(
+        public CardAnswerDalModel(
             int id,
-            AnswerResult result,
             DateTime learnDate,
             DateTime lastDayRepeatedAt,
             DateTime shouldRepeatAt
         )
         {
             Id = id;
-            Result = result;
             LearnDate = learnDate;
             LastDayRepeatedAt = lastDayRepeatedAt;
             ShouldRepeatAt = shouldRepeatAt;

@@ -74,6 +74,8 @@
     <Build Include="Stored Procedures\GetUsersHaveCardsToRepeat.sql" />
     <Build Include="Stored Procedures\GetFolders.sql" />
     <Build Include="Stored Procedures\GetFolderCards.sql" />
+    <Build Include="Stored Procedures\AddOrUpdateFolder.sql" />
+    <Build Include="Stored Procedures\DeleteFolder.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />

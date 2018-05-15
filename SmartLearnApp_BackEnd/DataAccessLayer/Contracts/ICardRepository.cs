@@ -8,7 +8,7 @@ namespace DataAccessLayer.Contracts
 {
     public interface ICardRepository
     {
-        void UpdateCardDates([NotNull] CardAnswerRequestDalModel cardAnswerDalModel);
+        void UpdateCardDates([NotNull] CardAnswerDalModel cardAnswerDalModel);
 
         [ItemCanBeNull]
         Task<IEnumerable<CardDalModel>> GetCards(int userId);
@@ -17,6 +17,8 @@ namespace DataAccessLayer.Contracts
         Task<IEnumerable<CardDalModel>> GetMissingCards(int userId);
 
         Task<int> AddOrUpdateCard([NotNull] CardDalModel cardDalModel);
+
+        void RescheduleMissedCards([NotNull] CardRescheduleDalModel cardRescheduleDalModel);
 
         void DeleteCard(int cardId);
     }

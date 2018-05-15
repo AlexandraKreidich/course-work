@@ -12,11 +12,11 @@ using WebApi.Models.Card;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     [Authorize]
     public class CardsController : Controller
     {
-        [NotNull] 
+        [NotNull]
         private readonly ICardService _cardService;
 
         public CardsController([NotNull] ICardService cardService)
@@ -24,13 +24,13 @@ namespace WebApi.Controllers
             _cardService = cardService;
         }
 
-        // GET /cards/get
+        // GET /cards -> Get cards for user to repeat
         [HttpGet]
         public async Task<IActionResult> Get()
         {
             int userId = HttpContext.User.GetUserId();
 
-            IEnumerable<CardBlModel> cardBlModels = await _cardService.GetCards(userId);
+            IEnumerable<CardBlModel> cardBlModels = await _cardService.GetCardsForUserToRepeat(userId);
 
             return Ok
             (
@@ -38,7 +38,7 @@ namespace WebApi.Controllers
             );
         }
 
-        // GET /cards/missed
+        // GET /cards/missed -> get cards that user missed
         [HttpGet]
         [Route("missed")]
         public async Task<IActionResult> GetMissed()
@@ -53,11 +53,11 @@ namespace WebApi.Controllers
             );
         }
 
-        // PUT /cards/put
+        // PUT /cards -> add or update card
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] CardWebApiModel cardWebApiModel)
         {
-            CardBlModel cardBlModel = 
+            CardBlModel cardBlModel =
                 await _cardService.AddOrUpdateCard(Mapper.Map<CardBlModel>(cardWebApiModel));
 
             return Ok
@@ -66,17 +66,27 @@ namespace WebApi.Controllers
             );
         }
 
-        // POST /cards/answer
+        // POST /cards/answer -> answer on card
         [HttpPost]
         [Route("answer")]
-        public IActionResult Post([FromBody] CardAnswerRequestWebApiModel cardAnswerRequestWebApiModel)
+        public IActionResult AnswerOnCard([FromBody] CardAnswerWebApiModel cardAnswerWebApiModel)
         {
-            _cardService.AnswerOnCard(Mapper.Map<CardAnswerRequestBlModel>(cardAnswerRequestWebApiModel));
+            _cardService.AnswerOnCard(Mapper.Map<CardAnswerBlModel>(cardAnswerWebApiModel));
 
             return Ok();
         }
 
-        // DELETE /cards/{id}
+        // POST /cards/reschedule -> reschedule missed cards
+        [HttpPost]
+        [Route("reschedule")]
+        public IActionResult RescheduleMissedCards(int[] cardIds)
+        {
+            _cardService.RescheduleMissedCards(cardIds);
+
+            return Ok();
+        }
+
+        // DELETE /cards/{id} -> delete card
         [HttpDelete("{id:int}")]
         public void Delete([FromQuery] int id)
         {
