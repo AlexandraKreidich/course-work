@@ -1,2 +1,0 @@
-export const FILMS_REQUEST = 'FILMS_REQUEST';
-export const FILMS_RESPONSE = 'FILMS_RESPONSE';

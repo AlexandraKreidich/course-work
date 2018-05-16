@@ -1,1 +1,0 @@
-export const UserRole = Object.freeze({"admin": 0, "user": 1});
