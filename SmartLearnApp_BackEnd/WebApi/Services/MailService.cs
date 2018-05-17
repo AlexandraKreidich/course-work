@@ -59,14 +59,14 @@ namespace WebApi.Services
         {
             using (var client = new SmtpClient())
             {
-                client.Connect("smtp.gmail.com", 587);
-                client.AuthenticationMechanisms.Remove("XOAUTH2");
-                client.Authenticate("kreidichalexandra@gmail.com", "bibzfpnysdyphufe");
-                foreach (MimeMessage msg in messages)
-                {
-                    client.Send(msg);
-                }
-                client.Disconnect(true);
+                //client.Connect("smtp.gmail.com", 587);
+                //client.AuthenticationMechanisms.Remove("XOAUTH2");
+                //client.Authenticate("kreidichalexandra@gmail.com", "bibzfpnysdyphufe");
+                //foreach (MimeMessage msg in messages)
+                //{
+                //    client.Send(msg);
+                //}
+                //client.Disconnect(true);
             }
         }
 

@@ -1,49 +1,19 @@
 import React, { Component } from "react";
+import Header from "./containers/Header";
 
 import "./styles/lib/bootstrap.min.css";
 import "./styles/lib/font-awesome/css/font-awesome.min.css";
 import "./styles/index.css";
 
 import BrainImg from "./img/brain.png";
+import Routes from "./Routes";
 
 class App extends Component {
   render() {
     return (
       <div>
-        <header id="header">
-          <div className="container">
-            <div id="logo" className="pull-left">
-              <h1>
-                <a href="#hero">Smart Learn</a>
-              </h1>
-            </div>
-
-            <nav id="nav-menu-container">
-              <ul className="nav-menu">
-                <li className="menu-active">
-                  <a href="#hero">Home</a>
-                </li>
-                <li>
-                  <a href="#about">About</a>
-                </li>
-                <li>
-                  <a href="#signIn">Sing in</a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </header>
-
-        <section id="hero">
-          <div className="hero-container">
-            <h1>Welcome to Smart Learn</h1>
-            <h2>App for spaced repetition to learn everything.</h2>
-            <a href="#about" className="btn-get-started">
-              Get Started
-            </a>
-          </div>
-        </section>
-
+        <Header />
+        <Routes />
         <main id="main">
           <section id="about">
             <div className="container">
@@ -107,7 +77,6 @@ class App extends Component {
               </div>
             </div>
           </section>
-
           <section id="call-to-action">
             <div className="container wow fadeIn">
               <div className="row">

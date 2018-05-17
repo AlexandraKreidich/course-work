@@ -1,10 +1,17 @@
-import React from "react";
-import { combineReducers, createStore, applyMiddleware } from "redux";
+import { combineReducers, createStore, applyMiddleware, compose } from "redux";
 import { reducer as formReducer } from "redux-form";
 import ReduxThunk from "redux-thunk";
+import { userReducer } from "./reducers/User";
 
-const rootReducer = combineReducers({});
+const rootReducer = combineReducers({
+  user: userReducer,
+  form: formReducer
+});
 
-const Store = createStore(rootReducer, applyMiddleware(ReduxThunk));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export default Store;
+const enhancer = composeEnhancers(applyMiddleware(ReduxThunk));
+
+const Store = createStore(rootReducer, enhancer);
+
+export { Store };

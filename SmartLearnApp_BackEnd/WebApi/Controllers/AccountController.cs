@@ -33,7 +33,7 @@ namespace WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            UserBlModel userBl = await _userService.Login(userWebApiModel.Email, userWebApiModel.Password);
+            UserBlModel userBl = await _userService.Login(userWebApiModel.Email.ToLower(), userWebApiModel.Password);
 
             if (userBl == null)
             {
@@ -63,7 +63,7 @@ namespace WebApi.Controllers
 
             RegisterUserWebApiModel registerUserModel = new RegisterUserWebApiModel
             (
-                model.Email,
+                model.Email.ToLower(),
                 model.FirstName,
                 model.LastName,
                 model.Password
